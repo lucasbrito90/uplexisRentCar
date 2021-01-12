@@ -28,6 +28,7 @@ A aplicação foi construida em computador linux 20.04 e com o banco de dados my
 ## Comandos para execução do banco
 
 - Necessário criar a base de dados com nome **rentcar**
+- **composer install** & **composer dump-autoload** para instalação das dependências do laravel
 - Favor rodar o comando **npm i & npm run dev** para instalação da biblioteca do Breeze para autenticação do laravel e o tailwindcss estilização 
     atualmente estou utilizando **npm 7.3.0 e node 15.5.1**
 - O comando **php artisan db:seed** para criação do usuário : **admin@admin.com** e senha : **admin**
