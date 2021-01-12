@@ -9,7 +9,7 @@
 
 ## Sobre o projeto
 
-A aplicação procura por carros  através do site https://www.questmultimarcas.com.br/ via CURL. Após o tratamento das informações, através de uma Facade criada e denominada de SyncTagsKeysToArrays os artigos são extraídos e inseridos no banco de dados, onde poderão ser listados através do link no menu superior "visualizar carros". Todas as rotas da aplicação são autenticadas pelo middleware auth e para auxiliar no front-end, junto com o blades components criados, foi utilizado o framework TailWindCSS.
+A aplicação procura por carros  através do site https://www.questmultimarcas.com.br/ via CURL. Após o tratamento das informações, através de uma Facade criada e denominada de SyncTagsKeysToArrays, os artigos são extraídos e inseridos no banco de dados, onde poderão ser listados através do link no menu superior "visualizar carros". Todas as rotas da aplicação são autenticadas pelo middleware auth e para auxiliar no front-end, junto com o blades components criados, foi utilizado o framework TailWindCSS.
 
 
 
