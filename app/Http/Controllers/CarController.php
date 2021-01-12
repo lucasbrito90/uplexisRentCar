@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    /***
+     * @param $url
+     * @param $nome
+     * @param $tag_shell_start
+     * @param $tag_shell_ends
+     * @param $tag_separator_only_name
+     * @return array
+     *
+     *
+     * o parametro $url recebe o dominio do site que o curl irá se conectar
+     * o parametro $tag_shell_start a primeira tag que servirá de invólucro para filtrar o conteúdo
+     * o parametro $tag_shell_ends a ultima tag  que servirá de invólucro para filtrar o conteúdo
+     * o parametro $tag_separator_only_name será a tag que ele buscará as informações
+     *
+     * Após encontrar as tags dentro do invólucro a mesma retornará um lista com o conteúdo. Podendo ser várias tags html
+     *
+     */
     public function contentsTagsRequest($url, $nome, $tag_shell_start, $tag_shell_ends, $tag_separator_only_name)
     {
         $url .= $nome;
@@ -41,6 +58,14 @@ class CarController extends Controller
 
     }
 
+    /**
+     * @param $cars_collection
+     * @return array
+     *
+     * este metódo inseri no banco de dados os contéudos já relacionados com um array de par chave/valor dos valores obitidos
+     * no html já filtrado.
+     * Sendo que só salvará se conteúdo não existir no banco de dados em uma tabela chamada cars ...
+     */
     public function findAndSaveCars($cars_collection)
     {
         $cars = [];
@@ -53,6 +78,20 @@ class CarController extends Controller
         return $cars;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     *
+     * este metodo possui as chaves que fará referência aos atributos dos carros através do parametro $keys_abject e
+     * as as tags onde os valores dos carros estaram entre tags informadas no atributo $target. Esses valores são informados
+     * a uma facade com nome SyncTagsKeystoArrays que retornará um lista de objetos Cars com os seus respectivos atributos e valores.
+     *
+     * Ao obter essa lista objetos vindo da facade SyncTagsKeystoArrays é enviado ao metodo findAndSaveCars para popular o banco de dados.
+     *
+     * caso ocorra tudo bem é disparado uma flash message de sucesso, caso contrário será informado uma mensagem ao usuário de
+     * falha ao tentar coletar ou salvar os dados no banco de dados.
+     *
+     */
     public function finderCar(Request $request)
     {
 
@@ -101,12 +140,25 @@ class CarController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     *
+     * buscar a lista de carros populados no banco de dados
+     */
     public function catchCar(Request $request)
     {
         $cars = Car::all();
         return view('listcar',['cars' => $cars]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     *
+     * deletar um registro pelo id do carro
+     */
     public function deleteCar(Request $request, $id)
     {
         $car = Car::destroy($id);

@@ -7,6 +7,13 @@ namespace App\Models;
 class SyncTagsKeysArrays
 {
 
+    /**
+     * @param array $finder
+     * @param $phrase
+     * @return array
+     *
+     * retorna um array de chaves e valores filtrados de carros
+     */
     function key_with_values(array $finder, $phrase){
 
         $items = [];
@@ -18,6 +25,14 @@ class SyncTagsKeysArrays
         return $items;
     }
 
+    /**
+     * @param $phrase
+     * @param $start
+     * @param $end
+     * @return string
+     *
+     * retorna os valores obtidos entre as tags informadas ...
+     */
     function find_btween($phrase, $start, $end)
     {
         $string = ' ' . $phrase;
@@ -40,6 +55,15 @@ class SyncTagsKeysArrays
         return $arts;
     }
 
+    /**
+     * @param $html_tag
+     * @param $tags_target
+     * @param $keys_object
+     * @return array
+     *
+     * combina as chaves
+     * e valores dos arrays
+     */
     function merge_keys_object_with_html_target($html_tag, $tags_target, $keys_object) {
 
         $objects = [];
